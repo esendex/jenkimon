@@ -92,12 +92,12 @@ li .bar:after, li .bar:before {
     background: hsl(20, 1%, 30%);
 }
 
-.neon .failed {
-    background: hsl(316, 100%, 50%);
+.neon .unstable {
+    background: #FF00BB;
 }
 
-.neon .unstable {
-    background: #DFDF15;
+.neon .failed {
+    background: #FF0055;
 }
 
 .neon .bar {
