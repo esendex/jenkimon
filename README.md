@@ -12,9 +12,17 @@ Name           | Description
 `server`       | Path to jenkins including protocol
 `theme`        | Choose a different theme from: neon.
 `filters`      | Comma separated list of words to filter displayed jobs by
-`scope`        | Set to "startsWith" to filter by matching the left side of the job name
+`scope`        | The method of filtering, see options below
 `showInactive` | Set to anything to show inactive jobs
 `bonusRound`   | Choose something to display when "green"
+
+### Scopes
+
+Name         | Description
+-------------|------------------------------------------------------------------------
+`contains`   | _Default_ Matches if job name contains a filter
+`startsWith` | Matches if job name starts with a filter
+`exclude`    | The inverse of `contains`; excludes jobs where name contains a filter
 
 ### Bonus Rounds
 

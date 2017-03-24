@@ -292,12 +292,24 @@ var start = (function() {
       bonusName = vars["bonusRound"],
       audioName = vars['audio'];
 
-  var nameMatcher = (scope == "contains")
-    ? function (name, filter) { return name.indexOf(filter) !== -1; }
-    : function (name, filter) { return name.indexOf(filter) === 0; };
+  var nameMatcher = function(name, filter) {
+    if (scope == "startsWith") {
+      return name.indexOf(filter) === 0;
+    }
+    if (scope == "contains") {
+      return name.indexOf(filter) !== -1;
+    }
+    
+    return name.indexOf(filter) !== -1;
+  };
 
   var ignore = function(name) {
-    return filters.length > 0 && !filters.some(function (filter) { return nameMatcher(name.toLowerCase(), filter); })
+    var ignoreJob = !filters.some(function (filter) { return nameMatcher(name.toLowerCase(), filter); });
+    if (scope == "exclude") {
+      ignoreJob = !ignoreJob;
+    }
+
+    return filters.length > 0 && ignoreJob;
   };
 
   var jobs = new Jobs('ul', baseUrl, ignore);
