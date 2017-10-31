@@ -263,10 +263,10 @@ var bonusRound = {
           $('#box').html('<img width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;"/>');
           
         if(zoomie.type === "gfycat")
-          $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+          $('#box').html('<div style="position:relative;padding-bottom:54%"><iframe src="'+ zoomie.url +'" frameborder="0" scrolling="no" width="100%" height="100%" style="position:absolute;top:0;left:0" allowfullscreen></iframe></div>');
             
         if(zoomie.type === "imgur")
-          $('#box').html('<video autoplay width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" type="video/webm"/><source src="'+ zoomie.url2 +'" type="video/mp4"></source></video>');
+          $('#box').html('<video autoplay loop width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" type="video/webm"/><source src="'+ zoomie.url2 +'" type="video/mp4"></source></video>');
       }
     })
     .on('anime', 'red', function() {
@@ -291,7 +291,7 @@ function getZoomies() {
         }
 
         if(url.indexOf("gfycat.com") > -1) {
-          zoomiesList.push({url: url, type: "gfycat"});
+          zoomiesList.push({url: url.replace('gfycat.com/', 'gfycat.com/ifr/'), type: "gfycat"});
         }
 
         if(url.indexOf("i.redd.it") > -1) {
