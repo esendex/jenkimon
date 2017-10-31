@@ -266,7 +266,7 @@ var bonusRound = {
           $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
             
         if(zoomie.type === "imgur")
-          $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'#embed" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+          $('#box').html('<video autoplay width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" />');
       }
     })
     .on('anime', 'red', function() {
@@ -285,6 +285,8 @@ function getZoomies() {
         var url = listings.data.children[i].data.url;
 
         if(url.indexOf("i.imgur.com") > -1) {
+          url = url.replace('.gifv', '.webm');
+          url = url.replace('.gif', '.webm');
           zoomiesList.push({url: url, type: "imgur"});
         }
 
