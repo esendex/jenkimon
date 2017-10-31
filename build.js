@@ -266,7 +266,7 @@ var bonusRound = {
           $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
             
         if(zoomie.type === "imgur")
-          $('#box').html('<video autoplay width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" />');
+          $('#box').html('<video autoplay width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" /></video>');
       }
     })
     .on('anime', 'red', function() {
