@@ -255,17 +255,19 @@ var bonusRound = {
   zoomies: function(jobs){
     $('body').prepend('<div id="box"></div>');
     var box = $('#box').hide();
-    var zoomie = zoomiesList[Math.floor(Math.random()*zoomiesList.length)];
     jobs.on('green', function() {
-      $('#box').show();
-      if(zoomie.type === "reddit_img")
-        $('#box').html('<img width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;"/>');
-        
-      if(zoomie.type === "gfycat")
-        $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+      if(zoomiesList.length > 0) {
+        var zoomie = zoomiesList[Math.floor(Math.random()*zoomiesList.length)];
+        $('#box').show();
+        if(zoomie.type === "reddit_img")
+          $('#box').html('<img width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;"/>');
           
-      if(zoomie.type === "imgur")
-        $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'#embed" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+        if(zoomie.type === "gfycat")
+          $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+            
+        if(zoomie.type === "imgur")
+          $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'#embed" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+      }
     })
     .on('anime', 'red', function() {
       $('#box').html('');
