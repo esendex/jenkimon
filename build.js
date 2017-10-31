@@ -251,7 +251,52 @@ var bonusRound = {
       $('#box').html('');
 	  $('#box').hide();
     });
+  },
+  zoomies: function(jobs){
+    $('body').prepend('<div id="box"></div>');
+    var box = $('#box').hide();
+    var zoomie = zoomiesList[Math.floor(Math.random()*zoomiesList.length)];
+    jobs.on('green', function() {
+      $('#box').show();
+      if(zoomie.type === "reddit_img")
+        $('#box').html('<img width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;"/>');
+        
+      if(zoomie.type === "gfycat")
+        $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+          
+      if(zoomie.type === "imgur")
+        $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'#embed" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
+    })
+    .on('anime', 'red', function() {
+      $('#box').html('');
+      $('#box').hide();
+    });
   }
+}
+
+var zoomiesList = [];
+function getZoomies() {
+  $.get('https://www.reddit.com/r/zoomies/top.json?limit=75&t=month')
+    .done(function (listings) {
+      zoomiesList = [];
+      for(var i=0; i < listings.data.children.length; i++) {
+        var url = listings.data.children[i].data.url;
+
+        if(url.indexOf("i.imgur.com") > -1) {
+          zoomiesList.push({url: url, type: "imgur"});
+        }
+
+        if(url.indexOf("gfycat.com") > -1) {
+          zoomiesList.push({url: url, type: "gfycat"});
+        }
+
+        if(url.indexOf("i.redd.it") > -1) {
+          zoomiesList.push({url: url, type: "reddit_img"});
+        }
+      }
+
+      console.log(zoomiesList);
+    });
 }
 
 var audioList = {
@@ -345,6 +390,9 @@ var start = (function() {
 
   window.setInterval(function() { jobs.poll(); }, 5000);
   jobs.poll();
+
+  window.setInterval(function() { getZoomies(); }, 86400000);
+  getZoomies();
 
   return jobs;
 });
