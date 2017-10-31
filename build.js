@@ -266,7 +266,7 @@ var bonusRound = {
           $('#box').html('<iframe width="' + $(window).width() + '" height="' + $(window).height() + '" src="'+ zoomie.url +'" style="border: 0;" frameborder="0" scrolling="no" allowfullscreen/>');
             
         if(zoomie.type === "imgur")
-          $('#box').html('<video autoplay width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" type="video/webm"/></video>');
+          $('#box').html('<video autoplay width="' + $(window).width() + '" height="' + $(window).height() + '"><source src="'+ zoomie.url +'" type="video/webm"/><source src="'+ zoomie.url2 +'" type="video/mp4"></source></video>');
       }
     })
     .on('anime', 'red', function() {
@@ -286,8 +286,8 @@ function getZoomies() {
 
         if(url.indexOf("i.imgur.com") > -1) {
           url = url.replace('.gifv', '.webm');
-          url = url.replace('.gif', '.webm');
-          zoomiesList.push({url: url, type: "imgur"});
+          url2 = url.replace('.webm', '.mp4')
+          zoomiesList.push({url: url, url2: url2, type: "imgur"});
         }
 
         if(url.indexOf("gfycat.com") > -1) {
