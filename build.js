@@ -273,6 +273,13 @@ var bonusRound = {
       $('#box').html('');
       $('#box').hide();
     });
+  },
+  christmas: function(jobs) {
+    jobs.on('green', function() {
+      imageShow("https://i.imgur.com/GfjV0xh.jpg");
+    }).on('anime', 'red', function() {
+      imageHide();
+    });
   }
 }
 
