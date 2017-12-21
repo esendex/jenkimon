@@ -29,3 +29,7 @@ Name         | Description
 - green
 - cat
 - porkour
+- guid
+- eightbit
+- zoomies
+- christmas
