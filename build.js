@@ -373,8 +373,8 @@ var start = (function() {
 
   var dateFilter = function(timestamp){
     if(timestamp === null) return true;
-    var secondsPerDay = 86400000;
-    var secondsToFilter = secondsPerDay * daysToShow
+    var millisecondsPerDay = 86400000;
+    var secondsToFilter = millisecondsPerDay * daysToShow
     var minimumTimestamp = new Date().getTime() - secondsToFilter
     return minimumTimestamp >= timestamp;
   }
