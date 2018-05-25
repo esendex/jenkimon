@@ -135,20 +135,22 @@ var Job = function(values, observable) {
   };
 };
 
-var Jobs = function(el, baseUrl, ignore) {
+var Jobs = function(el, baseUrl, ignore, datefilter) {
   var ul = $(el).html("");
   var _jobs = {};
   var lastColor = null;
   var _baseUrl = baseUrl;
   var _ignore = ignore;
+  var _dateFilter = datefilter;
   var observable = new Observable();
 
   observable.on('update', function(data) {
     for (var i = 0; i < data.jobs.length; i++) {
       var job = data.jobs[i];
 
-      if (_ignore(job.name)) { continue; }
+      if (_ignore(job.name)) { continue; }      
       if (job.lastBuild == null) { continue; }
+      if (_dateFilter(job.lastBuild.timestamp)) { continue; }
 
       var values = {
         name: job.name,
@@ -346,7 +348,8 @@ var start = (function() {
       scope = vars["scope"] || "contains",
       showInactive = vars["showInactive"],
       bonusName = vars["bonusRound"],
-      audioName = vars['audio'];
+      audioName = vars['audio'],
+      daysToShow = vars['daysToShow'];
 
   var nameMatcher = function(name, filter) {
     if (scope == "startsWith") {
@@ -368,7 +371,15 @@ var start = (function() {
     return filters.length > 0 && ignoreJob;
   };
 
-  var jobs = new Jobs('ul', baseUrl, ignore);
+  var dateFilter = function(timestamp){
+    if(timestamp === null) return true;
+    var secondsPerDay = 86400000;
+    var secondsToFilter = secondsPerDay * daysToShow
+    var minimumTimestamp = new Date().getTime() - secondsToFilter
+    return minimumTimestamp >= timestamp;
+  }
+
+  var jobs = new Jobs('ul', baseUrl, ignore, dateFilter);
 
   if (theme == "neon") { $('body').addClass('neon'); }
   if (showInactive)  { $('body').addClass('show-inactive'); }
