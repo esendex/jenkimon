@@ -15,6 +15,7 @@ Name           | Description
 `scope`        | The method of filtering, see options below
 `showInactive` | Set to anything to show inactive jobs
 `bonusRound`   | Choose something to display when "green"
+`daysToShow`   | Allows to hide build that have not be run in the last so many days examples '00'
 
 ### Scopes
 
